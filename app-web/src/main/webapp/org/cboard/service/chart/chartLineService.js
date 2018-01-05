@@ -56,28 +56,10 @@ cBoard.service('chartLineService', function ($state, $window) {
                 s.stack = s.valueAxisIndex.toString();
             } else if (s.type == "arealine") {
                 s.type = "line";
-                s.smooth = true;
-                s.symbol = 'none';
-                s.sampling = 'average';
-                s.itemStyle = {
-                    normal: {
-                        color: 'rgb(255, 70, 131)'
-                    }
-                };
-                s.areaStyle = {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgb(255, 158, 68)'
-                        }, {
-                            offset: 1,
-                            color: 'rgb(255, 70, 131)'
-                        }])
-                    }
-                }
+                s.areaStyle = {normal: {}};
             } else if (s.type == "stackline") {
                 s.type = "line";
-                s.stack = '总量';
+                s.stack = s.valueAxisIndex.toString();
                 s.areaStyle = {normal: {}};
                 if(i == aggregate_data.length - 1){
                     s.label = {
