@@ -1,4 +1,4 @@
 #Key and value types
-#Mon Feb 05 12:39:00 CST 2018
+#Thu Feb 08 09:53:41 CST 2018
 keyType=java.lang.String
 valueType=org.cboard.cache.CacheObject
