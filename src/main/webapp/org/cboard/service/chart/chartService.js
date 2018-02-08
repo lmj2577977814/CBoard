@@ -111,7 +111,7 @@ cBoard.service('chartService', function ($q, dataService, chartPieService, chart
                 if (optionFilter) {
                     optionFilter(option);
                 }
-                realTimeTicket(option, data.drill ? data.drill.config : null);
+                realTimeTicket(option, data.hasOwnProperty('drill')? data.drill.config : null);
                 if (widgetWraper) {
                     widgetWraper.loading = false;
                 }
