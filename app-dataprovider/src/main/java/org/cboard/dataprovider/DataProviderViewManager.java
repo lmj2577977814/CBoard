@@ -118,9 +118,17 @@ public class DataProviderViewManager {
         return null;
     }
 
+    /**
+     * 根据数据源类型,初始化form表单
+     * @param type
+     * @return
+     */
     public static List<Map<String, Object>> getDatasourceParams(String type) {
+        /** 根据type,获取 <? extends DataProvider></?> 类 */
         Class clz = DataProviderManager.getDataProviderClass(type);
+        /** 获取标注着 @DatasourceParameter注解的类的字段 */
         Set<Field> fieldSet = ReflectionUtils.getAllFields(clz, ReflectionUtils.withAnnotation(DatasourceParameter.class));
+        /** 对字段进行排序 */
         List<Field> fieldList = fieldOrdering.sortedCopy(fieldSet);
         List<Map<String, Object>> params = null;
         try {
@@ -128,6 +136,9 @@ public class DataProviderViewManager {
             params = new ArrayList<>();
             for (Field field : fieldList) {
                 field.setAccessible(true);
+                /**
+                 * 解析字段上的注解到map中,后续form表单使用
+                 */
                 DatasourceParameter datasourceParameter = field.getAnnotation(DatasourceParameter.class);
                 Map<String, Object> param = new HashMap<>();
                 param.put("label", datasourceParameter.label());

@@ -139,6 +139,11 @@ public class DashboardController extends BaseController {
         return DataProviderViewManager.getDatasourceParams(type);
     }
 
+    /**
+     * 添加数据源--html文本
+     * @param type
+     * @return
+     */
     @RequestMapping(value = "/getDatasourceView")
     public String getDatasourceView(@RequestParam(name = "type") String type) {
         return DataProviderViewManager.getDatasourceView(type);

@@ -33,8 +33,14 @@ public class DataProviderManager implements ApplicationContextAware {
     private static ApplicationContext applicationContext;
 
     static {
+        /**
+         * 扫描org.cboard下面拥有 @ProviderName的注解的类
+         */
         Set<Class<?>> classSet = new Reflections("org.cboard").getTypesAnnotatedWith(ProviderName.class);
         for (Class c : classSet) {
+            /**
+             *  过滤继承了DataProvider的类
+             */
             if (!c.isAssignableFrom(DataProvider.class)) {
                 providers.put(((ProviderName) c.getAnnotation(ProviderName.class)).name(), c);
             } else {
