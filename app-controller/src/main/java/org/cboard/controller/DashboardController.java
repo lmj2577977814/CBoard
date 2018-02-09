@@ -112,6 +112,13 @@ public class DashboardController extends BaseController {
         return DataProviderManager.getProviderList();
     }
 
+    /**
+     * 配置数据集
+     * @param type
+     * @param page
+     * @param datasourceId
+     * @return
+     */
     @RequestMapping(value = "/getConfigParams")
     public List<Map<String, Object>> getConfigParams(@RequestParam(name = "type") String type,
                                                      @RequestParam(name = "page") String page,
@@ -123,6 +130,13 @@ public class DashboardController extends BaseController {
         return DataProviderViewManager.getQueryParams(type, page, dataSource);
     }
 
+    /**
+     * 动态初始化数据集新增页面
+     * @param type
+     * @param page
+     * @param datasourceId
+     * @return
+     */
     @RequestMapping(value = "/getConfigView")
     public String getConfigView(@RequestParam(name = "type") String type,
                                 @RequestParam(name = "page") String page,
