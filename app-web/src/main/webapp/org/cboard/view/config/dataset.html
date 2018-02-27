@@ -33,7 +33,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">{{'CONFIG.DATASET.DATASOURCE'|translate}}</label>
+                                        <label class="col-sm-2 control-label">{{'CONFIG.DATASET.DATASOURCE'|translate}}</label><!-- 数据源 -->
                                         <div class="col-sm-10">
                                             <select class="form-control" ng-model="datasource"
                                                     ng-change="changeDs()"
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-2 col-md-3">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-success" ng-click="loadData()">{{'CONFIG.DATASET.LOAD_DATA'|translate}}</button>
+                                                <button type="button" class="btn btn-success" ng-click="loadData()">{{'CONFIG.DATASET.LOAD_DATA'|translate}}</button><!-- 读取数据 -->
                                                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     <span class="caret"></span>
                                                     <span class="sr-only">Toggle Dropdown</span>
@@ -76,7 +76,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">
-                                            {{'CONFIG.DATASET.REAL_TIME_INTERVAL'|translate}}
+                                            {{'CONFIG.DATASET.REAL_TIME_INTERVAL'|translate}} <!-- 实际间隔(秒) -->
                                         </label>
                                         <div class="col-sm-10">
                                             <input ng-model="curDataset.data.interval" class="form-control" placeholder="{{'CONFIG.DATASET.REAL_TIME_TIP'|translate}}"/>
@@ -98,7 +98,7 @@
                                             <li class="parent_li">
                                                 <span>
                                                     <img src="imgs/schema/dimension.gif">
-                                                    <b>{{'CONFIG.DATASET.DIMENSION'|translate}}</b>
+                                                    <b>{{'CONFIG.DATASET.DIMENSION'|translate}}</b><!-- 纬度列 -->
                                                 </span>
                                                 <img src="imgs/schema/hierarchy_add.png"
                                                      ng-click="curDataset.data.schema.dimension.push({id:uuid4.generate(),type: 'level', alias: hierarchy, columns: []})"
@@ -152,7 +152,7 @@
                                             <li class="parent_li">
                                                 <span>
                                                     <img src="imgs/schema/measure.gif">
-                                                    <b>{{'CONFIG.DATASET.MEASURE'|translate}}</b>
+                                                    <b>{{'CONFIG.DATASET.MEASURE'|translate}}</b><!-- 指标列 -->
                                                 </span>
                                                 <ul dnd-list="curDataset.data.schema.measure" dnd-allowed-types="['column']" dnd-drop="createNode(item)">
                                                     <li class="dndPlaceholder"><span class="sort-highlight btn btn-default btn-sm">+</span>

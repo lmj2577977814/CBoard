@@ -88,6 +88,8 @@ cBoard.controller('datasetCtrl', function ($scope, $http, $state, $stateParams, 
                     "type": "parent"
                 });
             }
+
+            /** 初始化jstree */
             jstree_ReloadTree(treeID, originalData);
         });
     };
@@ -97,6 +99,7 @@ cBoard.controller('datasetCtrl', function ($scope, $http, $state, $stateParams, 
         $scope.datasourceList = response;
     });
 
+    /** 获取数据集列表 */
     var getDatasetList = function () {
         $http.get("dashboard/getDatasetList.do").success(function (response) {
             $scope.datasetList = response;

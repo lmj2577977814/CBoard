@@ -10,7 +10,10 @@ cBoard.controller('datasourceCtrl', function ($scope, $state, $stateParams, $htt
     $scope.alerts = [];
     $scope.verify = {dsName:true,provider:true};
     $scope.params = [];
-    
+
+    /**
+     * 获取已配置的数据源列表
+     */
     var getDatasourceList = function () {
         $http.get("dashboard/getDatasourceList.do").success(function (response) {
             $scope.datasourceList = response;
@@ -24,6 +27,9 @@ cBoard.controller('datasourceCtrl', function ($scope, $state, $stateParams, $htt
 
     getDatasourceList();
 
+    /**
+     * 获取系统定义的数据源类型
+     */
     $http.get("dashboard/getProviderList.do").success(function (response) {
         $scope.providerList = response;
     });
@@ -111,10 +117,11 @@ cBoard.controller('datasourceCtrl', function ($scope, $state, $stateParams, $htt
         ModalUtils.info(ds,"modal-info", "lg");
     };
 
-    /** 定义请求地址 */
+    /** 动态获取不同数据源的输入框的HTML */
     $scope.changeDsView = function () {
         $scope.dsView = 'dashboard/getDatasourceView.do?type=' + $scope.curDatasource.type;
     };
+
 
     $scope.doDatasourceParams = function () {
         $http.get('dashboard/getDatasourceParams.do?type=' + $scope.curDatasource.type).then(function (response) {
