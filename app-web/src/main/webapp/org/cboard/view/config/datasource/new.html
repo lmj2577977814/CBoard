@@ -4,17 +4,18 @@
     </div>
 </div>
 <div class="form-group">
-    <label>{{'CONFIG.DATA_SOURCE.DATA_PROVIDER'|translate}}</label>
+    <label>{{'CONFIG.DATA_SOURCE.DATA_PROVIDER'|translate}}</label><!-- 数据源类型 -->
     <select class="form-control" ng-model="curDatasource.type"
             ng-change="changeDs()"
             ng-options="d for d in providerList"></select>
 </div>
 <div class="form-group" ng-class="{'has-error': !(verify.dsName || curDatasource.name)}">
-    <label>{{'CONFIG.DATA_SOURCE.NAME'|translate}}</label>
+    <label>{{'CONFIG.DATA_SOURCE.NAME'|translate}}</label><!-- 数据源名称 -->
     <input id="DataSetName" ng-model="curDatasource.name" class="form-control input-sm"/>
 </div>
 
 <!-- 根据所选数据源的不同,显示不同的输入框 -->
+<!-- 从后端获取HTML代码 -->
 <div ng-include="dsView"></div>
 </div>
 <div class="form-group">

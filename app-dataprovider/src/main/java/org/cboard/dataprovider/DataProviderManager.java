@@ -70,6 +70,7 @@ public class DataProviderManager implements ApplicationContextAware {
         Class c = providers.get(type);
         ProviderName providerName = (ProviderName) c.getAnnotation(ProviderName.class);
         if (providerName.name().equals(type)) {
+            /** 实例化DataProvider的一个实现类  */
             DataProvider provider = (DataProvider) c.newInstance();
             provider.setQuery(query);
             provider.setDataSource(dataSource);
@@ -77,7 +78,9 @@ public class DataProviderManager implements ApplicationContextAware {
             if (provider instanceof Initializing) {
                 ((Initializing) provider).afterPropertiesSet();
             }
+            /** 将DataProvide注入到spring中 */
             applicationContext.getAutowireCapableBeanFactory().autowireBean(provider);
+            /** 获取数据加载器--有缓存功能 */
             InnerAggregator innerAggregator = applicationContext.getBean(H2Aggregator.class);
             innerAggregator.setDataSource(dataSource);
             innerAggregator.setQuery(query);

@@ -38,13 +38,24 @@ public class DataProviderService {
     @Autowired
     private DatasetDao datasetDao;
 
+    /**
+     * 装在数据集数据
+     * @param datasourceId
+     * @param query
+     * @param dataset
+     * @return
+     * @throws Exception
+     */
     private DataProvider getDataProvider(Long datasourceId, Map<String, String> query, Dataset dataset) throws Exception {
         if (dataset != null) {
             datasourceId = dataset.getDatasourceId();
             query = dataset.getQuery();
         }
+        /** 获取数据源信息 */
         DashboardDatasource datasource = datasourceDao.getDatasource(datasourceId);
+        /** 获取数据源配置信息 */
         JSONObject datasourceConfig = JSONObject.parseObject(datasource.getConfig());
+        /** JSONObject 转换为map */
         Map<String, String> dataSource = Maps.transformValues(datasourceConfig, Functions.toStringFunction());
         DataProvider dataProvider = DataProviderManager.getDataProvider(datasource.getType(), dataSource, query);
         if (dataset != null && dataset.getInterval() != null && dataset.getInterval() > 0) {
@@ -71,6 +82,14 @@ public class DataProviderService {
         }
     }
 
+    /**
+     * 数据集加载 列
+     * @param datasourceId
+     * @param query
+     * @param datasetId
+     * @param reload
+     * @return
+     */
     public DataProviderResult getColumns(Long datasourceId, Map<String, String> query, Long datasetId, boolean reload) {
         DataProviderResult dps = new DataProviderResult();
         try {

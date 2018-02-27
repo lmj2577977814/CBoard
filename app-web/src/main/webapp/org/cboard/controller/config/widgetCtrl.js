@@ -1,5 +1,6 @@
 /**
  * Created by yfyuan on 2016/8/12.
+ *
  */
 'use strict';
 cBoard.controller('widgetCtrl', function ($scope, $state, $stateParams, $http, $uibModal, dataService, ModalUtils, updateService, $filter, chartService, $timeout) {
@@ -133,6 +134,7 @@ cBoard.controller('widgetCtrl', function ($scope, $state, $stateParams, $http, $
             }
         ];
 
+        /** 声明图表类型 */
         $scope.chart_types_status = {
             "line": true, "pie": true, "kpi": true, "table": true,
             "funnel": true, "sankey": true, "radar": true, "map": true,
@@ -141,6 +143,7 @@ cBoard.controller('widgetCtrl', function ($scope, $state, $stateParams, $http, $
             "areaMap": true, "contrast": true,"chinaMap":true,"chinaMapBmap":true,"relation":true
         };
 
+        /** 图表的series类型 */
         $scope.value_series_types = [
             {name: translate('CONFIG.WIDGET.LINE'), value: 'line'},
             {name: translate('CONFIG.WIDGET.AREA_LINE'),value:'arealine'},
@@ -151,12 +154,14 @@ cBoard.controller('widgetCtrl', function ($scope, $state, $stateParams, $http, $
             {name: translate('CONFIG.WIDGET.PERCENT_BAR'), value: 'percentbar'}
         ];
 
+        /** map 类型 */
         $scope.china_map_types = [
             {name: translate('CONFIG.WIDGET.SCATTER_MAP'), value: 'scatter'},
             {name: translate('CONFIG.WIDGET.HEAT_MAP'), value: 'heat'},
             {name: translate('CONFIG.WIDGET.MARK_LINE_MAP'), value: 'markLine'}
         ];
 
+        /** 聚集函数 */
         $scope.value_aggregate_types = [
             {name: 'sum', value: 'sum'},
             {name: 'count', value: 'count'},
@@ -166,6 +171,7 @@ cBoard.controller('widgetCtrl', function ($scope, $state, $stateParams, $http, $
             {name: 'distinct', value: 'distinct'}
         ];
 
+        /** kpi风格 指标图表 */
         $scope.kpi_styles = [
             {name: translate('CONFIG.WIDGET.AQUA'), value: 'bg-aqua'},
             {name: translate('CONFIG.WIDGET.RED'), value: 'bg-red'},
@@ -177,8 +183,7 @@ cBoard.controller('widgetCtrl', function ($scope, $state, $stateParams, $http, $
             $scope.provinces = data.provinces;
         });
 
-
-
+        /** treemap风格 */
         $scope.treemap_styles = [
             {name: translate('CONFIG.WIDGET.RANDOM'), value: 'random'},
             {name: translate('CONFIG.WIDGET.MULTI'), value: 'multi'},
@@ -189,6 +194,7 @@ cBoard.controller('widgetCtrl', function ($scope, $state, $stateParams, $http, $
             {name: translate('CONFIG.WIDGET.PURPLE'), value: 'purple'}
         ];
 
+        /** 热点图风格 */
         $scope.heatmap_styles = [
             {name: translate('CONFIG.WIDGET.BLUE'), value: 'blue'},
             {name: translate('CONFIG.WIDGET.RED'), value: 'red'},
@@ -197,11 +203,13 @@ cBoard.controller('widgetCtrl', function ($scope, $state, $stateParams, $http, $
             {name: translate('CONFIG.WIDGET.PURPLE'), value: 'purple'}
         ];
 
+        /** 热点图日期格式 */
         $scope.heatmap_date_format = [
             {name: 'yyyy-MM-dd', value: 'yyyy-MM-dd'},
             {name: 'yyyy/MM/dd', value: 'yyyy/MM/dd'},
             {name: 'yyyyMMdd', value: 'yyyyMMdd'}
         ];
+
 
         $scope.liquid_fill_style = [
             {name: translate('CONFIG.WIDGET.CIRCLE'), value: 'circle'},
@@ -221,26 +229,26 @@ cBoard.controller('widgetCtrl', function ($scope, $state, $stateParams, $http, $
          *  2:  1 or more
          ***************************************/
         $scope.configRule = {
-            line: {keys: 2, groups: -1, filters: -1, values: 2},
-            pie: {keys: 2, groups: -1, filters: -1, values: 2},
-            kpi: {keys: 0, groups: 0, filters: -1, values: 1},
-            table: {keys: -1, groups: -1, filters: -1, values: -1},
-            funnel: {keys: -1, groups: 0, filters: -1, values: 2},
-            sankey: {keys: 2, groups: 2, filters: -1, values: 1},
-            radar: {keys: 2, groups: -1, filters: -1, values: 2},
-            map: {keys: 2, groups: -1, filters: -1, values: 2},
-            scatter: {keys: 2, groups: -1, filters: -1, values: 2},
-            gauge: {keys: 0, groups: 0, filters: -1, values: 1},
-            wordCloud: {keys: 2, groups: 0, filters: -1, values: 1},
-            treeMap: {keys: 2, groups: 0, filters: -1, values: 1},
-            areaMap: {keys: 2, groups: -1, filters: -1, values: 1},
-            heatMapCalendar: {keys: 1, groups: 0, filters: -1, values: 1},
-            heatMapTable: {keys: 2, groups: 2, filters: -1, values: 1},
-            liquidFill: {keys: 0, groups: 0, filters: -1, values: 1},
-            contrast: {keys: 1, groups: 0, filters: -1, values: 2},
-            chinaMap:{keys: 2, groups: -1, filters: -1, values: 2},
-            chinaMapBmap:{keys: 2, groups: -1, filters: -1, values: 2},
-            relation: {keys: 2, groups: 2, filters: -1, values: 1}
+            line: {keys: 2, groups: -1, filters: -1, values: 2},//折线图
+            pie: {keys: 2, groups: -1, filters: -1, values: 2},//饼图
+            kpi: {keys: 0, groups: 0, filters: -1, values: 1},//指标图
+            table: {keys: -1, groups: -1, filters: -1, values: -1},//表格
+            funnel: {keys: -1, groups: 0, filters: -1, values: 2},//漏斗图
+            sankey: {keys: 2, groups: 2, filters: -1, values: 1},//桑基图
+            radar: {keys: 2, groups: -1, filters: -1, values: 2},//雷达图
+            map: {keys: 2, groups: -1, filters: -1, values: 2},//地图
+            scatter: {keys: 2, groups: -1, filters: -1, values: 2},//散点图
+            gauge: {keys: 0, groups: 0, filters: -1, values: 1},//计量图
+            wordCloud: {keys: 2, groups: 0, filters: -1, values: 1},//标签云
+            treeMap: {keys: 2, groups: 0, filters: -1, values: 1},//矩阵树图
+            areaMap: {keys: 2, groups: -1, filters: -1, values: 1},//区域地图
+            heatMapCalendar: {keys: 1, groups: 0, filters: -1, values: 1},//热点图日历
+            heatMapTable: {keys: 2, groups: 2, filters: -1, values: 1},//热点图表格
+            liquidFill: {keys: 0, groups: 0, filters: -1, values: 1},//水球图
+            contrast: {keys: 1, groups: 0, filters: -1, values: 2},//对比图
+            chinaMap:{keys: 2, groups: -1, filters: -1, values: 2},//中国地图
+            chinaMapBmap:{keys: 2, groups: -1, filters: -1, values: 2},//百度地图
+            relation: {keys: 2, groups: 2, filters: -1, values: 1}//关系图
         };
 
         $scope.switchLiteMode = function (mode) {
@@ -281,7 +289,7 @@ cBoard.controller('widgetCtrl', function ($scope, $state, $stateParams, $http, $
         $scope.showBox = false;
         $scope.folderIds = {};
 
-
+        /** 加载数据集 */
         var loadDataset = function (callback) {
             $http.get("dashboard/getDatasetList.do").success(function (response) {
                 $scope.datasetList = response;

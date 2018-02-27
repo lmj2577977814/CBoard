@@ -110,6 +110,8 @@ cBoard.controller('datasourceCtrl', function ($scope, $state, $stateParams, $htt
     $scope.showInfo = function (ds) {
         ModalUtils.info(ds,"modal-info", "lg");
     };
+
+    /** 定义请求地址 */
     $scope.changeDsView = function () {
         $scope.dsView = 'dashboard/getDatasourceView.do?type=' + $scope.curDatasource.type;
     };
@@ -120,11 +122,15 @@ cBoard.controller('datasourceCtrl', function ($scope, $state, $stateParams, $htt
         });
     };
 
+    /**
+     * 改变数据源视图
+     */
     $scope.changeDs = function () {
         $scope.changeDsView();
         $scope.curDatasource.config = {};
         $http.get('dashboard/getDatasourceParams.do?type=' + $scope.curDatasource.type).then(function (response) {
             $scope.params = response.data;
+            console.log(JSON.stringify(response.data));
             for(i in $scope.params){
                 var name = $scope.params[i].name;
                 var value = $scope.params[i].value;
